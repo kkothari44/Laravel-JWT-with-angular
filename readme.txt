@@ -11,7 +11,7 @@ For Backend
 
 For Frontend
 
-1.) Unzip the sampleFrontend folder
+1.) Unzip the frontend folder
 2.) Install Node js 
 3.) Install Angular cli
 4.) Run "nmp install"
