@@ -1,0 +1,45 @@
+﻿<h1>Hi {{currentUser.firstName}}!</h1>
+<h3> Registered users:</h3>
+<button *ngIf = "!clicked" class="btn btn-primary" (click)="showUserData($event)">
+    <span *ngIf="!loading" class="spinner-border spinner-border-sm mr-1"></span>
+    Click To Know
+</button>
+<div *ngIf = "clicked" >
+<h4> {{userEmail}} ({{userName}})</h4>
+<ul>
+    <li>
+        Click here to edit this user
+            - <a (click)="editUserDetail(userId)" class="text-danger">Edit</a>
+    </li>
+
+    <li>
+        Click here to delete this user
+        - <a (click)="deleteUser(userId)" class="text-danger">Delete</a>
+    </li>
+</ul>
+</div>
+
+<div *ngIf= "isEdit">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Edit
+            </button>
+        </div>
+    </form>
+</div>
