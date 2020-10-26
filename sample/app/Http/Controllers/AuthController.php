@@ -59,7 +59,9 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = JWTAuth::toUser($request->token);
-        return response()->json(['data' => $user]);
+        $phone = User::find($user->id)->phone;
+
+        return response()->json(['data' => $user,'phone' => $phone]);
     }
     
     public function edit(Request $request,AuthContract $authContract)
